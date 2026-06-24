@@ -8,8 +8,13 @@ import { cn } from "@/lib/utils";
 export function BottomNav() {
   const pathname = usePathname();
 
-  // Do not show bottom nav on auth pages
-  if (pathname === '/login' || pathname === '/register' || pathname.startsWith('/auth')) {
+  // Do not show bottom nav on auth pages AND transaction form page
+  if (
+    pathname === '/login' ||
+    pathname === '/register' ||
+    pathname.startsWith('/auth') ||
+    pathname === '/transactions/new'
+  ) {
     return null;
   }
 

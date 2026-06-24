@@ -273,7 +273,8 @@ export default function NewTransactionPage() {
         </div>
 
         {/* Save Button */}
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 pb-safe z-50">
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-100 pb-safe"
+          style={{ zIndex: 9999 }}>
           <button
             type="submit"
             disabled={submitting || loading || !amount || !categoryId}
