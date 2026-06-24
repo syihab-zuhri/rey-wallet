@@ -1,2 +1,1 @@
-1. tombol simpan untuk mencatat transaksi masih belum ada
-2. tombol edit profile untuk memperbarui profile juga belum berfungsi (ganti email dan password)
+1. pop up pada ganti password dan edit email saat di hp tertutup dengan footernya

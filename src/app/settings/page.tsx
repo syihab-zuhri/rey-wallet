@@ -202,8 +202,8 @@ export default function SettingsPage() {
 
       {/* Modal: Change Email */}
       {modalMode === "email" && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center">
-          <div className="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 pb-8 shadow-xl">
+        <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-900">Ubah Email</h2>
               <button onClick={closeModal} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
@@ -271,8 +271,8 @@ export default function SettingsPage() {
 
       {/* Modal: Change Password */}
       {modalMode === "password" && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center">
-          <div className="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 pb-8 shadow-xl">
+        <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-900">Ubah Password</h2>
               <button onClick={closeModal} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
