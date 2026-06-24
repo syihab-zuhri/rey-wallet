@@ -27,10 +27,10 @@ export default function NewTransactionPage() {
   const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
-  const supabase = createClient();
 
   useEffect(() => {
     let isMounted = true;
+    const supabase = createClient();
 
     async function fetchCategories() {
       // Fetch user specific categories
@@ -91,18 +91,23 @@ export default function NewTransactionPage() {
     return () => {
       isMounted = false;
     };
-  }, [supabase]);
+  }, []);
 
-  // Handle amount formatting (only numbers)
+  // Handle amount formatting to fix jumping cursor issue
+  const [displayAmount, setDisplayAmount] = useState("");
+
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/[^0-9]/g, "");
     setAmount(val);
+    setDisplayAmount(val ? new Intl.NumberFormat("id-ID").format(Number(val)) : "");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+
+    const supabase = createClient();
 
     if (!amount || Number(amount) <= 0) {
       setError("Nominal harus lebih dari 0");
@@ -198,7 +203,7 @@ export default function NewTransactionPage() {
             <input
               type="text"
               inputMode="numeric"
-              value={amount ? new Intl.NumberFormat("id-ID").format(Number(amount)) : ""}
+              value={displayAmount}
               onChange={handleAmountChange}
               placeholder="0"
               className="w-full text-center outline-none bg-transparent text-gray-900 placeholder-gray-300"
@@ -268,7 +273,7 @@ export default function NewTransactionPage() {
         </div>
 
         {/* Save Button */}
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 pb-safe z-50 sm:absolute">
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 pb-safe z-50">
           <button
             type="submit"
             disabled={submitting || loading || !amount || !categoryId}

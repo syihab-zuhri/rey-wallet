@@ -3,22 +3,23 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Check, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 export default function SettingsPage() {
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const supabase = createClient();
 
   useEffect(() => {
+    const supabase = createClient();
     async function getUser() {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) setEmail(user.email || "");
     }
     getUser();
-  }, [supabase]);
+  }, []);
 
   const handleLogout = async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/login");
     router.refresh();
@@ -31,14 +32,19 @@ export default function SettingsPage() {
       </div>
 
       <div className="p-6 space-y-6">
-        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-center gap-4">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-            <User className="w-8 h-8 text-blue-600" />
+        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <User className="w-8 h-8 text-blue-600" />
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-gray-900">Akun Saya</h2>
+              <p className="text-sm text-gray-500">{email}</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-gray-900">Akun Saya</h2>
-            <p className="text-sm text-gray-500">{email}</p>
-          </div>
+          <button className="text-xs font-medium text-blue-600 hover:text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full">
+            Edit
+          </button>
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">

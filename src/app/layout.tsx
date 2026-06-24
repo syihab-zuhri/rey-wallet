@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { BottomNav } from "@/components/layout/bottom-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="min-h-screen bg-gray-50 pb-20">
+          <main className="max-w-md mx-auto min-h-screen bg-white shadow-sm sm:border-x sm:border-gray-100 relative">
+            {children}
+          </main>
+          <BottomNav />
+        </div>
+      </body>
     </html>
   );
 }

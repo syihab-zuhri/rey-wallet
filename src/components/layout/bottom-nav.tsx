@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils";
 export function BottomNav() {
   const pathname = usePathname();
 
+  // Do not show bottom nav on auth pages
+  if (pathname === '/login' || pathname === '/register' || pathname.startsWith('/auth')) {
+    return null;
+  }
+
   const links = [
     { href: "/", label: "Home", icon: Home },
     { href: "/history", label: "Riwayat", icon: History },

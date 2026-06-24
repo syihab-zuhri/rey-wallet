@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { formatRupiah, cn } from "@/lib/utils";
-import { ArrowDownCircle, ArrowUpCircle, Wallet, Plus, History, TrendingUp, PieChart as PieChartIcon } from "lucide-react";
+import { ArrowDownCircle, ArrowUpCircle, Wallet, Plus, TrendingUp, PieChart as PieChartIcon } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -25,9 +25,10 @@ export default function DashboardPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({ income: 0, expense: 0, balance: 0 });
-  const supabase = createClient();
 
   useEffect(() => {
+    const supabase = createClient();
+
     async function fetchData() {
       // Get current month date range
       const date = new Date();
@@ -46,7 +47,7 @@ export default function DashboardPage() {
         .order("created_at", { ascending: false });
 
       if (!error && data) {
-        setTransactions(data as any);
+        setTransactions(data as unknown as Transaction[]);
 
         // Calculate summary
         const calc = data.reduce(
@@ -67,7 +68,7 @@ export default function DashboardPage() {
     }
 
     fetchData();
-  }, [supabase]);
+  }, []);
 
   // Single chart data: income vs expense percentage comparison
   const comparisonChartData = useMemo(() => {
