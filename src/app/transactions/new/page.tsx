@@ -152,9 +152,9 @@ export default function NewTransactionPage() {
   const filteredCategories = categories.filter((c) => c.type === type);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 pb-safe">
+    <div className="flex flex-col h-[100dvh] bg-gray-50">
       {/* Header */}
-      <div className="bg-white px-4 py-4 border-b border-gray-100 sticky top-0 z-20 flex items-center justify-between">
+      <div className="bg-white px-4 py-4 border-b border-gray-100 flex-none flex items-center justify-between">
         <Link href="/" className="p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </Link>
@@ -162,8 +162,11 @@ export default function NewTransactionPage() {
         <div className="w-9" /> {/* Spacer for centering */}
       </div>
 
-      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 pt-6 space-y-6">
-        {/* Type Toggle */}
+      <form onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0">
+
+        {/* Scrollable Content Area */}
+        <div className="flex-1 overflow-y-auto px-6 pt-6 space-y-6 pb-6">
+          {/* Type Toggle */}
         <div className="flex bg-gray-100 p-1 rounded-xl">
           <button
             type="button"
@@ -270,11 +273,10 @@ export default function NewTransactionPage() {
             rows={2}
             className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
           />
-        </div>
+        </div> {/* End of scrollable area */}
 
-        {/* Save Button */}
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-100 pb-safe"
-          style={{ zIndex: 9999 }}>
+        {/* Save Button Container */}
+        <div className="flex-none p-4 bg-white border-t border-gray-100 pb-safe">
           <button
             type="submit"
             disabled={submitting || loading || !amount || !categoryId}

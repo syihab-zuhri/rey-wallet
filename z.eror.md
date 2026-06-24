@@ -1,1 +1,1 @@
-1. pop up pada ganti password dan edit email saat di hp tertutup dengan footernya
+1. bisa atau tidak jika tombol simpan transaksi saat di mobile selalu di atas keyboard jika bisa buatkan begitu saja
